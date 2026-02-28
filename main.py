@@ -3,6 +3,7 @@
 from handlers import *
 from address_book import AddressBook
 
+
 def main():
     book = AddressBook()
 
@@ -15,7 +16,7 @@ def main():
         "delete": lambda args: delete_contact(args, book),
         "add-birthday": lambda args: add_birthday(args, book),
         "show-birthday": lambda args: show_birthday(args, book),
-        "birthdays": lambda args: birthdays(book),
+        "birthdays": lambda args: birthdays(args, book),
     }
 
     print("Welcome to the assistant bot!")

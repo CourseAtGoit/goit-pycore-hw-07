@@ -89,3 +89,21 @@ class AddressBook(UserDict):
             raise ValueError(f"Record with name '{name}' not found.")
 
         del self.data[name]
+        
+    def upcoming_birthdays(self, days_ahead=7):
+        users = []
+        for record in self.data.values():
+            if record.birthday is not None:
+                users.append(
+                    {
+                        "name": record.name.value.capitalize(),
+                        "birthday": record.birthday.value.strftime("%d.%m.%Y"),
+                    }
+                )
+        if not users:
+            return "No birthdays saved."
+        result = get_upcoming_birthdays(users, days_ahead)
+        if not result:
+            return f"No upcoming birthdays in the next {days_ahead} days."
+        lines = [f"{r['name'].capitalize()}: {r['congratulation_date']}" for r in result]
+        return "\n".join(lines)
